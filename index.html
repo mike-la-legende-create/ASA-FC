@@ -1,0 +1,1425 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portail Officiel - ASA FC Lokossa</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="fontawesome-free-7.0.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --benin-green: #004430;
+        --benin-gold: #f39c12;
+        --bg-light: #f8f9fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        background-color: #fff;
+        color: #333;
+      }
+      /* --- HEADER --- */
+      header {
+        background-color: var(--benin-green);
+        color: white;
+        padding: 15px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+      /* Effet du Logo qui déborde */
+      .logo-section {
+        position: relative;
+        height: 60px;
+      }
+      .logo-section img {
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 10001;
+        margin-top: 12px;
+      }
+      .main-nav {
+        margin-left: 120px;
+      }
+      .main-nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        gap: 15px;
+      }
+      .main-nav .nav-link,
+      .main-nav span {
+        color: white;
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 15px 5px;
+        display: block;
+      }
+      .main-nav .nav-link:hover {
+        color: var(--benin-gold);
+      }
+      /* Dropdown */
+      .nav-item-dropdown {
+        position: relative;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1100;
+        padding: 10px 0;
+        border-radius: 4px;
+      }
+      .nav-item-dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .dropdown-content a {
+        color: #2c3e50;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+      }
+      .dropdown-content a:hover {
+        background-color: var(--bg-light);
+        color: var(--benin-gold);
+      }
+      /* Header Right */
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .social-icons {
+        background-color: var(--benin-gold);
+        padding: 6px 12px;
+        border-radius: 4px;
+        display: flex;
+        gap: 6px;
+      }
+      .social-icons a {
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .search-container {
+        display: flex;
+        align-items: center;
+      }
+      #toggle-search {
+        display: none;
+      }
+      .search-icon {
+        cursor: pointer;
+        font-size: 18px;
+        color: white;
+      }
+      .search-box {
+        width: 0;
+        padding: 0;
+        border: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        outline: none;
+        background: white;
+      }
+      #toggle-search:checked ~ .search-box {
+        width: 120px;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        margin-left: 8px;
+      }
+      /* --- COULEURS DE FOND PERSONNALISÉES PAR PAGE --- */
+      #imagesASA {
+        background-color: #ffffff;
+      }
+      #propos {
+        background-color: #f4f7f6;
+      }
+      #historique {
+        background-color: #eef5f9;
+      }
+      #resultat {
+        background-color: #fcf8e3;
+      }
+      #photo {
+        background-color: #f3e5f5;
+      }
+      #audio {
+        background-color: #e8f5e9;
+      }
+      #video {
+        background-color: #fff3e0;
+      }
+      #match {
+        background-color: #e0f7fa;
+      }
+      #membre {
+        background-color: #e8eaf6;
+      }
+
+      /* --- CONTENU PRINCIPAL --- */
+      .main-content {
+        padding-top: 90px;
+        min-height: 80vh;
+      }
+      .content-section {
+        display: none;
+        padding: 30px 5%;
+      }
+      .container-box {
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .container-box h1,
+      .container-box h2 {
+        color: var(--benin-green);
+      }
+      .gallery-grid img {
+        width: 100%;
+        max-width: 300px;
+        margin: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .imgASA img {
+        width: 100%;
+        max-height: 800px;
+        object-fit: cover;
+      }
+      .corpsPropos,
+      .corpsPropos1 {
+        font-size: 28px;
+        text-align: center;
+        background: #a5c1dd33;
+        padding: 15px;
+        margin-top: 30px;
+      }
+      .corpsSect {
+        margin: 20px auto;
+        max-width: 1000px;
+        padding: 0 20px;
+        text-align: justify;
+        font-size: 18px;
+        line-height: 1.8;
+      }
+
+      /* Styles pour la section commentaires et likes des résultats */
+      .result-item {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+      .result-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+        align-items: center;
+      }
+      .btn-like,
+      .btn-dislike {
+        background: none;
+        border: 1px solid #ccc;
+        padding: 5px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .btn-like:hover {
+        background-color: #e1f5fe;
+        color: #0288d1;
+      }
+      .btn-dislike:hover {
+        background-color: #ffebee;
+        color: #c62828;
+      }
+      .comments-section {
+        margin-top: 15px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+      }
+      .comments-list {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #555;
+      }
+      .comment-input-group {
+        display: flex;
+        gap: 10px;
+      }
+      .comment-input-group input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .comment-input-group button {
+        padding: 8px 15px;
+        background-color: var(--benin-green);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      /* Formulaire Devenir Membre */
+      .form-container {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+      }
+      form {
+        background: #ffffff;
+        max-width: 650px;
+        width: 100%;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e0e0;
+      }
+      form h2 {
+        text-align: center;
+        color: var(--benin-green);
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+      input[type="text"],
+      input[type="tel"],
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: var(--benin-green);
+        outline: none;
+      }
+      input[type="file"] {
+        background: var(--bg-light);
+        cursor: pointer;
+      }
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        margin-top: 5px;
+      }
+      .radio-group label {
+        font-weight: normal;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+      button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(
+          135deg,
+          var(--benin-green) 0%,
+          #006644 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 25px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      button[type="submit"]:hover {
+        opacity: 0.9;
+      }
+
+      /* --- FOOTER --- */
+      .footer {
+        background: linear-gradient(135deg, #07111c 0%, #0b1a2b 100%);
+        color: #ffffff;
+        width: 100%;
+        margin-top: 60px;
+        border-top: 4px solid var(--benin-gold);
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px 20px 20px 20px;
+      }
+      .footer-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+      .footer-col h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        color: var(--benin-gold);
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .footer-col h3:hover {
+        color: #ffffff;
+      }
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .footer-col ul li {
+        margin-bottom: 10px;
+      }
+      .footer-col ul li a {
+        color: #b0c4de;
+        text-decoration: none;
+        font-size: 13.5px;
+        transition: color 0.2s;
+      }
+      .footer-col ul li a:hover {
+        color: var(--benin-gold);
+        padding-left: 3px;
+      }
+      /* Style pour le bouton Flèche Retour en haut dans le footer */
+      .back-to-top-btn {
+        background: none;
+        border: none;
+        color: var(--benin-gold);
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        text-transform: uppercase;
+        padding: 0;
+      }
+      .back-to-top-btn:hover {
+        color: #ffffff;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: #8fa3bf;
+      }
+      .footer-bottom a {
+        color: #8fa3bf;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-bottom a:hover {
+        color: var(--benin-gold);
+      }
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          padding: 10px;
+          position: relative;
+        }
+        .main-nav {
+          margin-left: 0;
+        }
+        .main-content {
+          padding-top: 10px;
+        }
+        .main-nav ul {
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          padding: 10px 0;
+        }
+        .footer-columns {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+          gap: 10px;
+        }
+        form {
+          padding: 20px;
+        }
+      }
+
+      /* --- ADAPTATION RESPONSIVE : AJOUTS SANS SUPPRESSION DU CONTENU --- */
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      img,
+      video,
+      audio {
+        max-width: 100%;
+      }
+
+      .imgASA img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .mobile-menu-toggle {
+        display: none;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: transparent;
+        color: #fff;
+        border-radius: 8px;
+        width: 44px;
+        height: 44px;
+        font-size: 21px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .mobile-menu-toggle:focus-visible,
+      .main-nav a:focus-visible,
+      .main-nav span:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid var(--benin-gold);
+        outline-offset: 2px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+
+      .gallery-grid h2 {
+        grid-column: 1 / -1;
+      }
+
+      .gallery-grid img {
+        display: block;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        margin: 0;
+      }
+
+      audio,
+      video {
+        display: block;
+        width: 100%;
+      }
+
+      .container-box,
+      .corpsSect,
+      .form-container,
+      .footer-container {
+        min-width: 0;
+      }
+
+      .corpsSect {
+        overflow-wrap: anywhere;
+      }
+
+      .result-actions {
+        flex-wrap: wrap;
+      }
+
+      .comment-input-group {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .comment-input-group input {
+        min-width: 0;
+        flex: 1 1 180px;
+      }
+
+      .comment-input-group button {
+        min-height: 40px;
+      }
+
+      form {
+        min-width: 0;
+      }
+
+      input,
+      textarea,
+      button {
+        max-width: 100%;
+      }
+
+      @media (max-width: 1024px) {
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          min-height: 68px;
+          height: auto;
+          padding: 8px 14px;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .logo-section {
+          width: 62px;
+          height: 48px;
+          flex: 0 0 62px;
+        }
+
+        .logo-section img {
+          top: -5px;
+          left: 0;
+          width: 70px;
+          height: 70px;
+          margin-top: 0;
+        }
+
+        .mobile-menu-toggle {
+          display: inline-flex;
+          order: 2;
+        }
+
+        .main-nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          max-height: calc(100vh - 68px);
+          max-height: calc(100dvh - 68px);
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          margin: 0;
+          padding: 8px 0 14px;
+          background: var(--benin-green);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+          order: 4;
+        }
+
+        .main-nav.is-open {
+          display: block;
+        }
+
+        .main-nav ul {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        .main-nav ul li {
+          width: 100%;
+        }
+
+        .main-nav .nav-link,
+        .main-nav span {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          min-height: 48px;
+          padding: 13px 20px;
+          font-size: 14px;
+          text-align: left;
+        }
+
+        .main-nav .nav-link:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .main-nav .nav-item-dropdown {
+          position: static;
+        }
+
+        .main-nav .nav-item-dropdown:hover .dropdown-content {
+          display: none;
+        }
+
+        .main-nav .nav-item-dropdown.is-open > .dropdown-content {
+          display: block;
+        }
+
+        .main-nav .dropdown-content {
+          display: none;
+          position: static;
+          width: 100%;
+          min-width: 0;
+          padding: 0;
+          border-radius: 0;
+          background: rgba(0, 0, 0, 0.14);
+          box-shadow: none;
+        }
+
+        .main-nav .dropdown-content a {
+          min-height: 44px;
+          padding: 12px 20px 12px 38px;
+          color: #fff;
+          font-size: 14px;
+        }
+
+        .main-nav .dropdown-content a:hover {
+          color: var(--benin-gold);
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .header-right {
+          order: 3;
+          margin-left: auto;
+          gap: 9px;
+        }
+
+        .social-icons {
+          padding: 7px 9px;
+          gap: 9px;
+        }
+
+        .social-icons a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 24px;
+          min-height: 24px;
+        }
+
+        #toggle-search:checked ~ .search-box {
+          width: min(30vw, 150px);
+          min-width: 90px;
+          padding: 7px 8px;
+        }
+
+        .main-content {
+          padding-top: 82px;
+        }
+
+        .content-section {
+          padding: 24px 4%;
+        }
+
+        .container-box {
+          width: 100%;
+          max-width: 900px;
+        }
+
+        .corpsSect {
+          padding: 0 4%;
+          font-size: 17px;
+          line-height: 1.7;
+        }
+
+        .corpsPropos,
+        .corpsPropos1 {
+          font-size: clamp(19px, 4vw, 28px);
+        }
+
+        .footer-container {
+          padding: 36px 18px 18px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding: 7px 10px;
+          gap: 7px;
+        }
+
+        .logo-section {
+          width: 52px;
+          flex-basis: 52px;
+        }
+
+        .logo-section img {
+          width: 62px;
+          height: 62px;
+        }
+
+        .mobile-menu-toggle {
+          width: 42px;
+          height: 42px;
+          font-size: 19px;
+        }
+
+        .header-right {
+          gap: 7px;
+        }
+
+        .social-icons {
+          padding: 6px 7px;
+          gap: 6px;
+        }
+
+        .social-icons a {
+          min-width: 22px;
+          min-height: 24px;
+          font-size: 13px;
+        }
+
+        .search-icon {
+          font-size: 17px;
+          padding: 8px 2px;
+        }
+
+        #toggle-search:checked ~ .search-box {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 10px;
+          width: min(65vw, 220px);
+          min-width: 0;
+          padding: 9px 10px;
+          margin-left: 0;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+        }
+
+        .main-content {
+          padding-top: 76px;
+        }
+
+        .content-section {
+          padding: 20px 14px;
+        }
+
+        .container-box h1 {
+          font-size: clamp(23px, 6vw, 30px);
+          line-height: 1.25;
+        }
+
+        .container-box h2,
+        .corpsSect h2 {
+          font-size: clamp(20px, 5.2vw, 26px);
+          line-height: 1.3;
+        }
+
+        .corpsSect {
+          padding: 0 15px;
+          margin: 18px auto;
+          font-size: 15.5px;
+          line-height: 1.65;
+          text-align: left;
+        }
+
+        .corpsSect h3 {
+          font-size: 19px;
+        }
+
+        .corpsSect ul,
+        .container-box ul {
+          padding-left: 22px;
+        }
+
+        .result-item {
+          padding: 14px;
+        }
+
+        .result-actions {
+          gap: 8px;
+        }
+
+        .btn-like,
+        .btn-dislike {
+          flex: 1 1 135px;
+          min-height: 42px;
+          padding: 8px 9px;
+          font-size: 13px;
+        }
+
+        .comment-input-group {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .comment-input-group input,
+        .comment-input-group button {
+          width: 100%;
+          min-height: 44px;
+          font-size: 14px;
+        }
+
+        .form-container {
+          padding: 10px 0;
+        }
+
+        form {
+          padding: 20px 15px;
+          border-radius: 12px;
+        }
+
+        form h2 {
+          font-size: 21px;
+          line-height: 1.3;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea,
+        input[type="file"] {
+          padding: 11px;
+          font-size: 16px;
+        }
+
+        .radio-group {
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+
+        button[type="submit"] {
+          min-height: 48px;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .footer {
+          margin-top: 35px;
+        }
+
+        .footer-container {
+          padding: 30px 16px 16px;
+        }
+
+        .footer-columns {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 22px 14px;
+          text-align: left;
+          margin-bottom: 28px;
+        }
+
+        .footer-col h3 {
+          font-size: 12px;
+          line-height: 1.4;
+        }
+
+        .footer-col ul li a {
+          font-size: 13px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+          gap: 8px;
+          line-height: 1.5;
+        }
+      }
+
+      @media (max-width: 360px) {
+        header {
+          padding-left: 7px;
+          padding-right: 7px;
+          gap: 5px;
+        }
+
+        .logo-section {
+          width: 46px;
+          flex-basis: 46px;
+        }
+
+        .logo-section img {
+          width: 56px;
+          height: 56px;
+        }
+
+        .header-right {
+          gap: 5px;
+        }
+
+        .social-icons {
+          gap: 4px;
+          padding: 5px;
+        }
+
+        .social-icons a {
+          min-width: 20px;
+        }
+
+        .mobile-menu-toggle {
+          width: 39px;
+          height: 39px;
+        }
+
+        .footer-columns {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-col .back-to-top-btn {
+          margin: 0 auto;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="logo-section">
+        <img src="ASA3.png" alt="Logo ASA FC" />
+      </div>
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobile-menu-toggle"
+        aria-label="Ouvrir le menu"
+        aria-controls="main-navigation"
+        aria-expanded="false"
+      >
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <nav class="main-nav" id="main-navigation">
+        <ul>
+          <li><a href="#" class="nav-link accueil">ACCUEIL</a></li>
+          <li><a href="#" class="nav-link" id="historiques">HISTORIQUE</a></li>
+          <li><a href="#" class="nav-link" id="resultats">RESULTATS</a></li>
+          <li class="nav-item-dropdown">
+            <span class="nav-link" role="button" tabindex="0" aria-expanded="false"
+              >GALERIE <i class="fas fa-angle-down"></i
+            ></span>
+            <div class="dropdown-content">
+              <a href="#" id="photos">Photos</a>
+              <a href="#" id="audios">Audios</a>
+              <a href="#" id="videos">Vidéos</a>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link" id="matchs">PROCHAIN(S) MATCH(S)</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <span class="nav-link" role="button" tabindex="0" aria-expanded="false"
+              >TEXTES <i class="fas fa-angle-down"></i
+            ></span>
+            <div class="dropdown-content">
+              <a href="STATUT FINALE ASA.docx">Statuts</a>
+              <a href="REGLEMENT INTERIEUR FINALE ASA.docx"
+                >Règlement Intérieur</a
+              >
+            </div>
+          </li>
+          <li><a href="#" class="nav-link" id="membres">DEVENIR MEMBRE</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <div class="social-icons">
+          <a href="https://www.facebook.com" target="_blank"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="https://twitter.com" target="_blank"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="https://www.youtube.com" target="_blank"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+        <div class="search-container">
+          <input type="checkbox" id="toggle-search" />
+          <label for="toggle-search" class="search-icon">
+            <i class="fas fa-search"></i>
+          </label>
+          <input type="search" placeholder="Rechercher..." class="search-box" />
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content">
+      <!-- Section Historique -->
+      <section id="historique" class="content-section">
+        <div class="container-box">
+          <h1>Historique de l'ASA FC</h1>
+          <ul>
+            <li>
+              <strong>Création et Origines (2003) :</strong> L'Association
+              Sportive d’Agnivedji Football Club (ASA FC) a vu le jour en 2003
+              grâce à l'initiative d'un groupe de passionnés de football
+              originaires du quartier Agnivedji et des environs. Unis par
+              l'amour du ballon rond et le désir de créer un cadre de
+              rassemblement sain, ils posent les bases de ce qui allait devenir
+              une grande famille sportive.
+            </li>
+            <li>
+              <strong>Évolution et Structuration :</strong> Au fil des années,
+              le club a su grandir et fédérer au-delà du cercle initial d'amis.
+              Pour répondre aux exigences de pérennité, l'association a
+              structuré son fonctionnement autour de valeurs fortes : la
+              fraternité, l'amour et le développement.
+            </li>
+            <li>
+              <strong>Mise en conformité institutionnelle :</strong> Dans une
+              dynamique de professionnalisation et de respect des lois en
+              vigueur, l'ASA FC a procédé à l'adoption de ses statuts et de son
+              règlement intérieur lors de son Assemblée Générale Extraordinaire
+              de mise en conformité, consolidant ainsi son statut d'association
+              sportive apolitique et à but non lucratif.
+            </li>
+            <li>
+              <strong>Aujourd'hui :</strong> Plus de deux décennies après sa
+              fondation, l'ASA FC s'est imposée comme un acteur incontournable
+              du sport de masse et d'entretien à Lokossa, réunissant des membres
+              autour de valeurs de solidarité, de fitness, de marche et de
+              compétitions amicales.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section Résultats avec Module de Likes et Commentaires -->
+      <section id="resultat" class="content-section">
+        <div class="container-box">
+          <h2>Résultats des Matchs</h2>
+          <div class="resultats-list">
+            <!-- Exemple de résultat interactif -->
+            <div class="result-item">
+              <p>
+                <strong>Match amical - Saison 2026 :</strong> ASA FC 1 - 1
+                Étoile FC
+              </p>
+              <div class="result-actions">
+                <button class="btn-like" onclick="incrementerLike(this)">
+                  👍 J'aime (<span class="like-count">0</span>)
+                </button>
+                <button class="btn-dislike" onclick="incrementerDislike(this)">
+                  👎 Je n'aime pas (<span class="dislike-count">0</span>)
+                </button>
+              </div>
+              <div class="comments-section">
+                <div class="comments-list">
+                  Aucun commentaire pour le moment.
+                </div>
+                <div class="comment-input-group">
+                  <input type="text" placeholder="Ajouter un commentaire..." />
+                  <button onclick="ajouterCommentaire(this)">Envoyer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Photos -->
+      <section id="photo" class="content-section">
+        <div class="container-box gallery-grid">
+          <h2>Galerie Photos</h2>
+          <img src="will.jpg" alt="Photo ASA" />
+          <img src="tableau.jpg" alt="Tableau ASA" />
+          <img src="plage.jpg" alt="Plage ASA" />
+          <img src="plage1.jpg" alt="Plage 1" />
+          <img src="plage2.jpg" alt="Plage 2" />
+          <img src="plage3.jpg" alt="Plage 3" />
+        </div>
+      </section>
+
+      <!-- Section Audio -->
+      <section id="audio" class="content-section">
+        <div class="container-box">
+          <h2>Galerie Audio</h2>
+          <audio controls loop>
+            <source
+              src="daphne_-_Promets_Moi_(Official_Video).mp3"
+              type="audio/mpeg"
+            />
+            Votre navigateur ne supporte pas l'élément audio.
+          </audio>
+        </div>
+      </section>
+
+      <!-- Section Vidéo -->
+      <section id="video" class="content-section">
+        <div class="container-box">
+          <h2>Galerie Vidéo</h2>
+          <video controls width="100%">
+            <source
+              src="SUSPECT_95_-_Dis_lui_(_Clip_officiel_)(360p).mp4"
+              type="video/mp4"
+            />
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
+        </div>
+      </section>
+
+      <!-- Section Match -->
+      <section id="match" class="content-section">
+        <div class="container-box">
+          <h2>Prochain(s) Match(s)</h2>
+          <p>Aucun match pour le moment.</p>
+        </div>
+      </section>
+
+      <!-- Section Devenir Membre (Formulaire) -->
+      <section id="membre" class="content-section">
+        <div class="form-container">
+          <form
+            action="traitement.php"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <h2>Formulaire d'adhésion ASA</h2>
+            <input type="hidden" name="csrf_token" value="" />
+            <label for="nom">Nom *</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              required
+              maxlength="50"
+              pattern="[A-Za-zÀ-ÿ ]+"
+            />
+            <label for="prenom">Prénom *</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              required
+              maxlength="50"
+              pattern="[A-Za-zÀ-ÿ ]+"
+            />
+            <label for="profession">Profession *</label>
+            <input
+              type="text"
+              id="profession"
+              name="profession"
+              required
+              maxlength="100"
+            />
+            <label for="cv"
+              >CV / Fichier à joindre * (PDF, JPG, PNG max 5Mo)</label
+            >
+            <input
+              type="file"
+              id="cv"
+              name="cv"
+              accept=".pdf,.jpg,.jpeg,.png"
+              required
+            />
+            <label for="adresse">Adresse *</label>
+            <textarea
+              id="adresse"
+              name="adresse"
+              rows="3"
+              required
+              maxlength="255"
+            ></textarea>
+            <label for="contact">Contact *</label>
+            <input
+              type="tel"
+              id="contact"
+              name="contact"
+              pattern="^\+?[0-9 ]{8,15}$"
+              required
+            />
+            <label for="apport">Que pouvez-vous apporter au club ? *</label>
+            <textarea
+              id="apport"
+              name="apport"
+              rows="5"
+              required
+              maxlength="1000"
+            ></textarea>
+            <p>Avez-vous lu nos textes ? *</p>
+            <div class="radio-group">
+              <label
+                ><input type="radio" name="lu_textes" value="oui" required />
+                Oui</label
+              >
+              <label
+                ><input type="radio" name="lu_textes" value="non" /> Non</label
+              >
+            </div>
+            <button type="submit">Envoyer</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Accueil par défaut (Texte mis à jour avec la rubrique À propos) -->
+      <div id="imagesASA" class="imgASA">
+        <img src="ASA1.png" alt="Bannière ASA 1" />
+      </div>
+      <div id="propos" class="corpstout">
+        <section class="corpsSect">
+          <h2>Bienvenue sur la page officielle de l'ASA FC</h2>
+          <h3>À propos</h3>
+          <p>
+            L'Association Sportive d’Agnivedji Football Club (ASA FC) est une
+            association sportive, apolitique et à but non lucratif. Fondée pour
+            promouvoir la cohésion, la santé et l'épanouissement communautaire,
+            elle s'articule autour des points clés suivants :
+          </p>
+          <ul>
+            <li>
+              <strong>Notre Devise :</strong> Fraternité, Amour et
+              Développement.
+            </li>
+            <li>
+              <strong>Nos Couleurs :</strong>
+              <ul>
+                <li>Couleurs principales : Bleu et blanc.</li>
+                <li>Couleur de remplacement : Noir.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Notre Slogan :</strong>
+              <ul>
+                <li>ASA FC, joie</li>
+                <li>ASA FC, fraternité</li>
+                <li>ASA FC, santé, santé, santé</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Nos Missions et Objectifs :</strong> L'association vise un
+              monde où tous les membres s'épanouissent pleinement et participent
+              efficacement au développement de la communauté. Plus précisément,
+              l'ASA FC se veut :
+              <ul>
+                <li>
+                  Un cadre de développement des actions communautaires et de
+                  partenariat responsable entre les acteurs locaux (institutions
+                  étatiques, population, bailleurs, artisans).
+                </li>
+                <li>
+                  Un espace favorisant la concertation, l’échange et
+                  l’amélioration des relations entre ses membres.
+                </li>
+                <li>
+                  Une structure d’appui aux initiatives de sensibilisation et de
+                  promotion des jeunes, des femmes, en particulier dans les
+                  milieux ruraux et marginaux.
+                </li>
+                <li>
+                  Une institution de soutien aux efforts locaux pour un
+                  développement communautaire autonome, soutenu et durable.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Siège et Entraînements :</strong> Le siège de
+              l'association est fixé à Lokossa (quartier Zongo, maison Degbey
+              Nasser, Département du Mono). Les séances d'entraînement se
+              déroulent sur le terrain de la Direction Départementale de la
+              Police Républicaine du Mono.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-columns">
+          <div class="footer-col">
+            <!-- Remplacement du texte "ACCUEIL" par une flèche de retour en haut -->
+            <button class="back-to-top-btn accueil">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+          <div class="footer-col">
+            <h3 id="historiques-foot" class="foot-link">HISTORIQUE</h3>
+          </div>
+          <div class="footer-col">
+            <h3 id="resultats-foot" class="foot-link">RESULTATS</h3>
+          </div>
+          <div class="footer-col">
+            <h3>GALERIE</h3>
+            <ul>
+              <li><a href="#" id="photos-foot">Photos</a></li>
+              <li><a href="#" id="audios-foot">Audios</a></li>
+              <li><a href="#" id="videos-foot">Vidéos</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3 id="matchs-foot" class="foot-link">PROCHAIN(S) MATCH(S)</h3>
+          </div>
+          <div class="footer-col">
+            <h3>TEXTES</h3>
+            <ul>
+              <li><a href="STATUT FINALE ASA.docx">Statuts</a></li>
+              <li>
+                <a href="REGLEMENT INTERIEUR FINALE ASA.docx"
+                  >Règlements Intérieurs</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; Association Sportive d'Agnivedji (ASA FC) - 2026</p>
+          <a href="#">Mentions légales et gestion des cookies</a>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="SiteWebASA.js"></script>
+  </body>
+</html>
